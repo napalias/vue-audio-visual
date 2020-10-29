@@ -92,6 +92,16 @@ const props = {
   canvFillColor: {
     type: [String, Array],
     default: null
+  },
+
+  /**
+   * prop: 'volume'
+   * Audio volume 
+   * Default volume is on 
+   */
+  volume: {
+    type: Number,
+    default: 1
   }
 }
 
@@ -147,7 +157,12 @@ const methods = {
 
     src.connect(this.analyser)
     this.analyser.fftSize = this.fftSize
-    this.analyser.connect(this.audioCtx.destination)
+    
+    const audioVolume = this.audioCtx.createGain();
+    audioVolume.gain.value = this.volume;
+
+    this.analyser.connect(audioVolume);
+    audioVolume.connect(this.audioCtx.destination);
   },
 
   /**
