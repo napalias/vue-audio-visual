@@ -158,11 +158,11 @@ const methods = {
     src.connect(this.analyser)
     this.analyser.fftSize = this.fftSize
     
-    const audioVolume = this.audioCtx.createGain();
-    audioVolume.gain.value = this.volume;
+    this.audioVolume = this.audioCtx.createGain();
+    this.audioVolume.gain.value = this.volume;
 
-    this.analyser.connect(audioVolume);
-    audioVolume.connect(this.audioCtx.destination);
+    this.analyser.connect(this.audioVolume);
+    this.audioVolume.connect(this.audioCtx.destination);
   },
 
   /**
