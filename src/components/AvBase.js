@@ -162,7 +162,7 @@ const methods = {
     this.audioGain.gain.value = this.volume;
 
     this.analyser.connect(this.audioGain);
-    this.audioVolume.connect(this.audioCtx.destination);
+    this.audioGain.connect(this.audioCtx.destination);
   },
 
   /**
