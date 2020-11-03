@@ -158,10 +158,10 @@ const methods = {
     src.connect(this.analyser)
     this.analyser.fftSize = this.fftSize
     
-    this.audioVolume = this.audioCtx.createGain();
-    this.audioVolume.gain.value = this.volume;
+    this.audioGain = this.audioCtx.createGain();
+    this.audioGain.gain.value = this.volume;
 
-    this.analyser.connect(this.audioVolume);
+    this.analyser.connect(this.audioGain);
     this.audioVolume.connect(this.audioCtx.destination);
   },
 
@@ -178,12 +178,31 @@ const methods = {
       offset += (1 / colorsArray.length)
     })
     return gradient
+  },
+
+  /**
+   * Unmute audio gain
+   */
+  unmute(){
+    this.audioGain.gain.value = 1;
+  },
+
+  /**
+   * Mute audio gain
+   */
+  mute(){
+    this.audioGain.gain.value = 0;
   }
 }
 
 export default {
   props,
   render: h => h('div'),
+  data() {
+    return {
+      audioGain:null,
+    }
+  },
   mounted () {
     this.createHTMLElements()
 

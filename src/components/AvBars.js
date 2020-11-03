@@ -108,7 +108,8 @@ const AvBars = {
       analyser: null,
       ctx: null,
       audioCtx: null,
-      caps: Array.apply(null, Array(this.fftSize / 2)).map(() => 0)
+      caps: Array.apply(null, Array(this.fftSize / 2)).map(() => 0),
+      
     }
   },
   methods: {
